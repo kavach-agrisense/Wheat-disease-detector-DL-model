@@ -59,7 +59,7 @@ def predict(image_path):
 
     if trained_model is None:
         trained_model = ResNet50V2()
-        trained_model.load_state_dict(torch.load("../model_training_code/best_ResNet50V2.pth"))
+        trained_model.load_state_dict(torch.load("best_ResNet50V2.pth"))
         trained_model.eval()
 
     with torch.no_grad():
