@@ -1,6 +1,8 @@
-fastapi==0.115.6
-Pillow==9.5.0
+fastapi
+Pillow
 gunicorn
+uvicorn
+numpy<2.0
 python-multipart
 # Torch CPU (no CUDA!)
 torch==2.2.2+cpu
