@@ -1,5 +1,5 @@
 from fastapi import FastAPI, File, UploadFile
-from pred_helper import predict
+from .pred_helper import predict
 from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 # Add CORS middleware
