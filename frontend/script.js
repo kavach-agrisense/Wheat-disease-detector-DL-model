@@ -61,7 +61,7 @@
             errorDiv.style.display = 'none';
 
             try {
-                const response = await fetch('http://localhost:8000/predict', {
+                const response = await fetch('https://wheat-disease-detector-dl-model.onrender.com/predict', {
                     method: 'POST',
                     body: formData
                 });
@@ -76,7 +76,7 @@
                     errorDiv.style.display = 'block';
                 }
             } catch (err) {
-                errorDiv.textContent = 'Failed to connect to the server. Make sure the backend is running on http://localhost:8000';
+                errorDiv.textContent = 'Failed to connect to the server.';
                 errorDiv.style.display = 'block';
             } finally {
                 loading.style.display = 'none';
