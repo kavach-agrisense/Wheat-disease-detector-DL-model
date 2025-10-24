@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Wheat Disease Detection</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="icon">🌾</div>
+            <h1>Wheat Disease Detector</h1>
+            <p class="subtitle">AI-Powered Disease Detection System</p>
+        </div>
+
+        <div class="upload-area" id="uploadArea">
+            <div class="upload-icon">📸</div>
+            <div class="upload-text">Click to Upload or Drag & Drop</div>
+            <div class="upload-hint">Upload a wheat plant image for analysis</div>
+            <input type="file" id="fileInput" accept="image/*">
+        </div>
+
+        <div class="preview-container" id="previewContainer">
+            <img id="imagePreview" class="image-preview" alt="Preview">
+            <button class="btn btn-predict" id="predictBtn">Analyze Image</button>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <div class="loading-text">Analyzing wheat image...</div>
+        </div>
+
+        <div class="result-container" id="resultContainer">
+            <div class="result-label">Detection Result</div>
+            <div class="result-text" id="resultText"></div>
+        </div>
+
+        <div class="error" id="error"></div>
+    </div>
+
+    <script src="script.js">
+    </script>
+</body>
+</html>
