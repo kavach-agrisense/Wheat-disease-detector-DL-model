@@ -22,7 +22,7 @@ def home():
 async def get_prediction(file: UploadFile = File(...)):
     try:
         image_bytes = await file.read()
-        image_path =f"/tmp/temp_file.jpg"
+        image_path =f"/tmp/{file.filename}"
         with open(image_path, "wb") as f:
             f.write(image_bytes)
 
