@@ -34,38 +34,35 @@ class ResNet50V2(nn.Module):
     def forward(self, x):
         return self.model(x)
 
+transform = transforms.Compose([
+            transforms.Resize((224, 224)),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                 std=[0.229, 0.224, 0.225])
+        ])
+
+def get_model():
+    global trained_model
+    if trained_model is None:
+        print("Loading model for the first time...")
+        model = ResNet50V2()
+        MODEL_PATH = os.path.join(os.path.dirname(__file__), "best_ResNet50V2.pth")
+        model.load_state_dict(torch.load(MODEL_PATH, map_location=torch.device("cpu"))
+        model.eval()
+        trained_model = model
+        print("Model loaded successfully.")
+    return trained_model
+
 
 def predict(image_path):
     """
     Predict the wheat disease from an image path.
     Logs success or error details to console (Render dashboard).
     """
-    global trained_model
-
     try:
         image = Image.open(image_path).convert("RGB")
-        transform = transforms.Compose([
-            transforms.Resize((224, 224)),
-            transforms.ToTensor(),
-            transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                                 std=[0.229, 0.224, 0.225])
-        ])
         image_tensor = transform(image).unsqueeze(0)
-
-        if trained_model is None:
-            MODEL_PATH = os.path.join(os.path.dirname(__file__), "best_ResNet50V2.pth")
-
-            if not os.path.exists(MODEL_PATH):
-                print(f"[ERROR] Model file not found at: {MODEL_PATH}")
-                return "Model file missing on server"
-
-            print(f"[INFO] Loading model from: {MODEL_PATH}")
-            trained_model = ResNet50V2()
-            trained_model.load_state_dict(torch.load(MODEL_PATH, map_location=torch.device("cpu")))
-            trained_model.eval()
-            print("[INFO] Model loaded successfully")
-
-       
+        model = get_model():
         with torch.no_grad():
             output = trained_model(image_tensor)
             _, predicted_class = torch.max(output, 1)
